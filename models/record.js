@@ -18,14 +18,14 @@ const recordSchema = new Schema({
   },
 
   userId: {
-    type: Schema.Types.ObjectID,
+    type: Schema.Types.ObjectId,
     ref: "User",
     index: true,
     require: true,
   },
 
   categoryId: {
-    type: Schema.Types.ObjectID,
+    type: Schema.Types.ObjectId,
     ref: "Category",
     index: true,
     require: true,
