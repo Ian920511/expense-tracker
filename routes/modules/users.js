@@ -40,8 +40,8 @@ router.get("/login", (req, res) => {
 router.post(
   "/login",
   (req, res, next) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
+    const { account, password } = req.body;
+    if (!account || !password) {
       res.redirect("/user/login");
     }
     next();

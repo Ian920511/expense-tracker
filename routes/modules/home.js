@@ -1,10 +1,15 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const records = require('../../models/record')
+const Records = require("../../models/record");
 
-router.get('/', (req, res) => {
-  
-})
+router.get("/", (req, res) => {
+  // const userId = req.user._id;
+  res.render("index");
+  // Records.find({ userId})
+  //   .lean()
+  //   .sort({ date: 'desc'})
+  //   .then(() => res.render('index'))
+});
 
-module.exports = router
+module.exports = router;
