@@ -6,7 +6,7 @@ const User = require("../models/user");
 
 module.exports = (app) => {
   app.use(passport.initialize());
-  app.use(passport.session);
+  app.use(passport.session());
 
   passport.use(
     new LocalStrategy(
