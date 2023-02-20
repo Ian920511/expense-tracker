@@ -11,11 +11,28 @@ router.get("/register", (req, res) => {
 
 router.post("/register", (req, res) => {
   const { account, name, password, confirmPassword } = req.body;
+  const errors = [];
+
+  if (!account || !name || !password || !confirmPassword) {
+    errors.push({ message: "所有欄位皆為必填!" });
+  }
+
+  if (errors.length) {
+    return res.render("register", {
+      errors,
+      account,
+      name,
+      password,
+      confirmPassword,
+    });
+  }
 
   User.findOne({ account }).then((user) => {
     if (user) {
-      console.log("此 Email 已被註冊過了!");
+      errors.push({ message: "此 Email 已被註冊過了!" });
+
       return res.render("register", {
+        errors,
         account,
         name,
         password,
@@ -54,6 +71,7 @@ router.post(
 
 router.get("/logout", (req, res) => {
   req.logout();
+  req.flash("success_msg", "你已經成功登出!");
   req.redirect("/users/login");
 });
 

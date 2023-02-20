@@ -15,12 +15,20 @@ module.exports = (app) => {
         User.findOne({ account })
           .then((user) => {
             if (!user) {
-              return done(null, false, { message: "此帳號未註冊!" });
+              return done(
+                null,
+                false,
+                req.flash("warning_msg", "此帳號未註冊!")
+              );
             }
 
             return bcrypt.compare(password, user.password).then((isMatch) => {
               if (!isMatch) {
-                return done(null, false, { message: "帳號或密碼不符!" });
+                return done(
+                  null,
+                  false,
+                  req.flash("warning_msg", "帳號或密碼不符!")
+                );
               }
 
               return done(null, user);
