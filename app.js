@@ -13,6 +13,9 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
+const usePassport = require("./config/passport");
+require("./config/mongoose");
+
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
