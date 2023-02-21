@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 const db = mongoose.connection;
 
 db.on("error", () => {
-  console.log(error);
+  console.log("error");
 });
 
 db.once("open", () => {

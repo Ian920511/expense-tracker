@@ -76,7 +76,7 @@ router.post(
 router.get("/logout", (req, res) => {
   req.logout();
   req.flash("success_msg", "你已經成功登出!");
-  req.redirect("/users/login");
+  res.redirect("/users/login");
 });
 
 module.exports = router;

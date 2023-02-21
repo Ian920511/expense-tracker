@@ -40,16 +40,19 @@ router.get("/edit/:id", (req, res) => {
 router.put("/edit/:id", (req, res) => {
   const _id = req.params.id;
   const userId = req.user._id;
+  const { name, date, categoryId, amount } = req.body;
 
-  return Record.findOne({ _id, userId })
-    .update(req.body)
-    .then(() => res.redirect(`/records/${_id}`))
+  return Record.findOneAndUpdate(
+    { _id, userId },
+    { name, date, categoryId, userId, amount }
+  )
+    .then(() => res.redirect("/"))
     .catch((error) => console.log(error));
 });
 
 router.delete("/:id", (req, res) => {
-  const _id = req.params._id;
-  const userId = req.user_id;
+  const _id = req.params.id;
+  const userId = req.user._id;
 
   return Record.findOne({ _id, userId })
     .then((record) => record.remove())

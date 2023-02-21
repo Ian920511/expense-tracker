@@ -1,7 +1,27 @@
-<ul class="list-group">
-  <li class="list-group-item">An item</li>
-  <li class="list-group-item">A second item</li>
-  <li class="list-group-item">A third item</li>
-  <li class="list-group-item">A fourth item</li>
-  <li class="list-group-item">And a fifth one</li>
-</ul>
+<div>
+  <ul class="list-group">
+    {{#each records}}
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-auto me-auto">
+            <i class="{{this.categoryId.icon}}"></i>
+            <h4>{{this.name}}</h4>
+            <p>{{this.date}}</p>
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-success" href="./records/edit/{{ this._id }}">edit</a>
+            <form action="/records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+              <button
+                    type="submit"
+                    class="btn btn-danger btn-sm text-white"
+                    onclick="return confirm(`請問確認要刪除{{this.name}}嗎?`)"
+                  >delete</button>
+            </form>
+        </div>  
+      </li>
+    {{/each}}
+  </ul>
+</div>
+<div class="d-grid gap-2 col-1 mx-auto mt-5">
+  <a href="/records/new"><button class="btn btn-warning border border-dark" type="button">新增支出</button></a>
+</div>
