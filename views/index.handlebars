@@ -1,59 +1,61 @@
-<div>
-  <form action="/">
-    <div class="col-12">
-      <select
-      class="form-select"
-      aria-label="Default select example"
-      name="checkedCategory"
-      onchange="this.form.submit()"
-    >
-      <option selected value="all">所有類別</option>
-      {{#each categories}}
-        {{#if ../checkedCategory}}
-        <option value="{{this._id}}" {{#compare this._id ../checkedCategory}}selected{{/compare}}>{{this.name}}</option>
-        {{else}}
-        <option value="{{this._id}}">{{this.name}}</option>
-        {{/if}}
-        
+<div class="container">
+  <div>
+    <form action="/">
+      <div class="col-8 mx-auto mt-5">
+        <select
+        class="form-select"
+        aria-label="Default select example"
+        name="checkedCategory"
+        onchange="this.form.submit()"
+      >
+        <option selected value="all">所有類別</option>
+        {{#each categories}}
+          {{#if ../checkedCategory}}
+          <option value="{{this._id}}" {{#compare this._id ../checkedCategory}}selected{{/compare}}>{{this.name}}</option>
+          {{else}}
+          <option value="{{this._id}}">{{this.name}}</option>
+          {{/if}}
+          
+        {{/each}}
+      </select>
+      </div>
+    </form>
+  </div>
+  <div class="row mx-auto">
+    <div class="d-flex justify-content-between mt-5">
+            <h2>總金額:</h2>
+            <h1>{{this.totalAmount}}</h1>
+          </div>
+  </div>
+  <div>
+    <ul class="list-group">
+      {{#each records}}
+        <li class="list-group-item">
+          <div class="row align-items-center">
+            <div class="col-auto me-auto">
+              <i class="{{this.categoryId.icon}}"></i>
+              <h4>{{this.name}}</h4>
+              <p>{{this.date}}</p>
+            </div>
+            <div class="col-auto text-end">
+              <h3>{{this.amount}}</h3>
+            </div>
+            <div class="col-auto">
+              <a class="btn btn-success btn-sm" href="./records/edit/{{ this._id }}">edit</a>
+              <form action="/records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+                <button
+                      type="submit"
+                      class="btn btn-danger btn-sm text-white"
+                      onclick="return confirm(`請問確認要刪除{{this.name}}嗎?`)"
+                    >delete</button>
+              </form>
+            </div>
+          </div>  
+        </li>
       {{/each}}
-    </select>
-    </div>
-  </form>
-
-</div>
-<div>
-  <div class="d-flex justify-content-between mt-5">
-          <h2>總金額:</h2>
-          <h1>{{this.totalAmount}}</h1>
-        </div>
-</div>
-<div>
-  <ul class="list-group">
-    {{#each records}}
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-auto me-auto">
-            <i class="{{this.categoryId.icon}}"></i>
-            <h4>{{this.name}}</h4>
-            <p>{{this.date}}</p>
-          </div>
-          <div>
-            <h3>{{this.amount}}</h3>
-          </div>
-          <div class="col-auto">
-            <a class="btn btn-success" href="./records/edit/{{ this._id }}">edit</a>
-            <form action="/records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-              <button
-                    type="submit"
-                    class="btn btn-danger btn-sm text-white"
-                    onclick="return confirm(`請問確認要刪除{{this.name}}嗎?`)"
-                  >delete</button>
-            </form>
-        </div>  
-      </li>
-    {{/each}}
-  </ul>
-</div>
-<div class="d-grid gap-2 col-1 mx-auto mt-5">
-  <a href="/records/new"><button class="btn btn-warning border border-dark" type="button">新增支出</button></a>
+    </ul>
+  </div>
+  <div class="d-grid gap-2 col-1 mx-auto mt-4">
+    <a href="/records/new"><button class="btn btn-warning border border-dark" type="button">新增支出</button></a>
+  </div>
 </div>
