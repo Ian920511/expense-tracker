@@ -16,7 +16,19 @@ if (process.env.NODE_ENV !== "production") {
 const usePassport = require("./config/passport");
 require("./config/mongoose");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main",
+    helpers: {
+      compare: function (arg1, arg2, options) {
+        if (arg1.toString() === arg2.toString()) {
+          return options.fn(this);
+        }
+      },
+    },
+  })
+);
 app.set("view engine", "handlebars");
 
 app.use(

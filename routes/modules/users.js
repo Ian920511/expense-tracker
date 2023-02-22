@@ -63,13 +63,14 @@ router.post(
   (req, res, next) => {
     const { account, password } = req.body;
     if (!account || !password) {
-      res.redirect("/user/login");
+      req.flash("warning_msg", "請輸入信箱或密碼");
+      res.redirect("/users/login");
     }
     next();
   },
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/user/login",
+    failureRedirect: "/users/login",
   })
 );
 

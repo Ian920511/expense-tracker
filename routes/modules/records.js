@@ -1,3 +1,4 @@
+const dayjs = require("dayjs");
 const express = require("express");
 const router = express.Router();
 
@@ -27,11 +28,13 @@ router.get("/edit/:id", (req, res) => {
   return Record.findOne({ _id, userId })
     .lean()
     .then((record) => {
-      Category.findOne({ _id: record.categoryId })
+      const { name, amount, categoryId } = record;
+      const date = dayjs(record.date).format("YYYY-MM-DD");
+
+      Category.find({})
         .lean()
-        .then((category) => {
-          const categoryName = category.name;
-          res.render("edit", { record, categoryName });
+        .then((categories) => {
+          res.render("edit", { name, amount, categoryId, date, categories });
         })
         .catch((error) => console.log(error));
     });

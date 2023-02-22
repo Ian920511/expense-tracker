@@ -10,7 +10,7 @@
         id="name"
         placeholder="Enter name"
         name="name"
-        value="{{record.name}}"
+        value="{{name}}"
         required
       />
     </div>
@@ -24,7 +24,7 @@
         id="date"
         placeholder="Enter Date"
         name="date"
-        value="{{record.date}}"
+        value="{{date}}"
         required
       />
     </div>
@@ -32,23 +32,22 @@
       <label for="category" class="form-label">類別:<span
           class="text-danger"
         >*</span></label>
-      <input
-        type="text"
-        class="form-control"
-        id="category"
-        placeholder="類別"
-        list="categoryOptions"
-        name="category"
-        value="{{record.category}}"
-        required
-      />
-      <datalist id="categoryOptions">
-        <option>Select</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </datalist>
+      <select
+      name="categoryId"
+      id="selectedCategory"
+      class="form-control"
+      aria-label="select by category"
+      required
+    >
+      <option selected disabled value="">選擇類別</option>
+      {{#each categories}}
+        {{#if ../categoryId}}
+          <option value="{{this._id}}" {{#compare this._id ../categoryId}}selected{{/compare}}>{{this.name}}</option>
+        {{else}}
+          <option value="{{this._id}}">{{this.name}}</option>
+        {{/if}}
+      {{/each}}
+    </select>
     </div>
     <div class="mb-3">
       <label for="amount" class="form-label">金額:<span
@@ -59,7 +58,7 @@
         class="form-control"
         id="amount"
         name="amount"
-        value="{{record.amount}}"
+        value="{{amount}}"
         required
       />
     </div>

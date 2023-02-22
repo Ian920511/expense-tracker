@@ -30,32 +30,28 @@
       <label for="category" class="form-label">類別:<span
           class="text-danger"
         >*</span></label>
-      <input
-        type="text"
+      <select
+        name="categoryId"
+        id="selectedCategory"
         class="form-control"
-        id="category"
-        placeholder="類別"
-        list="categoryOptions"
-        name="category"
+        aria-label="select by category"
         required
-      />
-      <datalist id="categoryOptions">
-        <option>Select</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </datalist>
+      >
+        <option selected disabled value="">選擇類別</option>
+        {{#each category}}
+          <option value="{{this._id}}">{{this.name}}</option>
+        {{/each}}
+      </select>
     </div>
     <div class="mb-3">
-      <label for="price" class="form-label">金額:<span
+      <label for="amount" class="form-label">金額:<span
           class="text-danger"
         >*</span></label>
       <input
         type="text"
         class="form-control"
-        id="price"
-        name="price"
+        id="amount"
+        name="amount"
         required
       />
     </div>

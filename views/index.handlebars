@@ -1,4 +1,33 @@
 <div>
+  <form action="/">
+    <div class="col-12">
+      <select
+      class="form-select"
+      aria-label="Default select example"
+      name="checkedCategory"
+      onchange="this.form.submit()"
+    >
+      <option selected value="all">所有類別</option>
+      {{#each categories}}
+        {{#if ../checkedCategory}}
+        <option value="{{this._id}}" {{#compare this._id ../checkedCategory}}selected{{/compare}}>{{this.name}}</option>
+        {{else}}
+        <option value="{{this._id}}">{{this.name}}</option>
+        {{/if}}
+        
+      {{/each}}
+    </select>
+    </div>
+  </form>
+
+</div>
+<div>
+  <div class="d-flex justify-content-between mt-5">
+          <h2>總金額:</h2>
+          <h1>{{this.totalAmount}}</h1>
+        </div>
+</div>
+<div>
   <ul class="list-group">
     {{#each records}}
       <li class="list-group-item">
@@ -7,6 +36,9 @@
             <i class="{{this.categoryId.icon}}"></i>
             <h4>{{this.name}}</h4>
             <p>{{this.date}}</p>
+          </div>
+          <div>
+            <h3>{{this.amount}}</h3>
           </div>
           <div class="col-auto">
             <a class="btn btn-success" href="./records/edit/{{ this._id }}">edit</a>
