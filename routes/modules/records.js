@@ -28,13 +28,13 @@ router.get("/edit/:id", (req, res) => {
   return Record.findOne({ _id, userId })
     .lean()
     .then((record) => {
-      const { name, amount, categoryId } = record;
+      const { _id, name, amount, categoryId } = record;
       const date = dayjs(record.date).format("YYYY-MM-DD");
 
       Category.find({})
         .lean()
         .then((categories) => {
-          res.render("edit", { name, amount, categoryId, date, categories });
+          res.render("edit", { _id,name, amount, categoryId, date, categories });
         })
         .catch((error) => console.log(error));
     });
