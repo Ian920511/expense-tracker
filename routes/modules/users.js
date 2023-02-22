@@ -49,7 +49,10 @@ router.post("/register", (req, res) => {
       name,
       password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
     })
-      .then(() => res.redirect("/users/login"))
+      .then(() => {
+        req.flash("success_msg", "註冊成功! 請登入使用。");
+        res.redirect("/users/login");
+      })
       .catch((error) => console.log(error));
   });
 });
